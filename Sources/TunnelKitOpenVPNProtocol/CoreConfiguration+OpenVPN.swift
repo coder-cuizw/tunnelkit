@@ -38,6 +38,7 @@ import Foundation
 import TunnelKitCore
 import CTunnelKitCore
 import CTunnelKitOpenVPNProtocol
+import UIKit
 
 extension CoreConfiguration {
     struct OpenVPN {
@@ -86,7 +87,12 @@ extension CoreConfiguration {
                 let platform: String
                 let platformVersion = ProcessInfo.processInfo.operatingSystemVersion
 #if os(iOS)
-                platform = "ios"
+//                platform = "ios"
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    platform = "ipad"
+                } else {
+                    platform = "ios"
+                }
 #elseif os(tvOS)
                 platform = "tvos"
 #else
